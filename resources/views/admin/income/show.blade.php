@@ -43,7 +43,7 @@
 
             <td>
                 
-                <a class="btn btn-success btn-sm" href="{{ url('/edit/project',$row->id) }}">Edit</a>
+                <a class="btn btn-success btn-sm" href="{{ url('/income/edit',$row->id) }}">Edit</a>
                 <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" href="{{ url('/delete',$row->id) }}">Delete</a> 
             
             </td>

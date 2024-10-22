@@ -56,7 +56,57 @@ class IncomeController extends Controller
             return redirect()->back()->with('success', 'Income added successfully.');
 
         }
-
-
     }
+
+    public function edit($id){
+        $all=Project::where('status',0)->get();
+        $data=Income::where('id',$id)->firstOrFail();
+        return view('admin.income.edit',compact('data','all'));
+      }
+
+      public function update(Request $request){
+        // dd($request->all());
+
+        $request->validate([
+            'project_id' =>'required',
+            'date' =>'required',
+            'income_amount' =>'required',
+            'bank_account' =>'required',
+            'note' =>'required',
+        ]);
+
+        $oldincome=Income::where('id',$request->id)->firstOrFail();
+
+        $id=$request->id;
+
+        $update=Income::where('id', $id)->update([
+            'project_id' => $request->project_id,
+            'date' => $request->date,
+            'income_amount' => $request->income_amount,
+            'bank_account_id' => $request->bank_account,
+            'note' => $request->note,
+            'editor'=> Auth::user()->id,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        $data=Project::where('id',$request->project_id)->firstOrFail();
+
+        $paid_amount = (float) $request->income_amount + (float) $data->paid_amount - (float)$oldincome->income_amount;
+        $due_amount = (float) $data->project_value - (float)$paid_amount;
+
+        if( $update){
+            $update = Project::where('id',$request->project_id)->update([
+                'paid_amount' => $paid_amount,
+                'due_amount' => $due_amount,
+                
+                ]);
+
+
+
+            
+         return redirect()->back()->with('success','Data updated successfully');
+
+        }
+    }
+
 }

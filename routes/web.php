@@ -43,6 +43,8 @@ Route::post('/project/update', [ProjectController::class, 'update'])->middleware
 Route::get('/income', [IncomeController::class, 'add'])->middleware('auth');
 Route::post('/income/submit', [IncomeController::class, 'store'])->middleware('auth');
 Route::get('/income/show', [IncomeController::class,'show'])->middleware('auth');
+Route::get('/income/edit/{id}', [IncomeController::class, 'edit'])->middleware('auth');
+Route::post('/income/update', [IncomeController::class, 'update'])->middleware('auth');
 
 
 
