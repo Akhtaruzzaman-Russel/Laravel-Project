@@ -111,11 +111,25 @@
                         </ul>
                     </div>
                 </li>
+                
+                <li>
+                    <a href="#sidebarTasks" data-bs-toggle="collapse">
+                        <i data-feather="clipboard"></i>
+                        <span> Expense </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li><a href="{{url('/expense')}}">Add Expense</a></li>
+                            <li><a href="{{url('/expense/show')}}">List of Expense</a></li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li>
-                    <a href="apps-file-manager.html">
+                    <a href="{{url('/setting')}}">
                         <i data-feather="file-plus"></i>
-                        <span> File Manager </span>
+                        <span> Setting </span>
                     </a>
                 </li>
 
